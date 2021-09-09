@@ -22,7 +22,7 @@ jobs:
       - image: alpine
     steps:
       - checkout
-      - run: "echo 'Hello from module A!'"
+      - run: "echo 'Hello from module A!!'"
       - run: cat module-a/README.md
 
   module-b:
