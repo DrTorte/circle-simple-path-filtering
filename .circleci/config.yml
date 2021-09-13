@@ -26,7 +26,7 @@ jobs:
       - run: cat module-a/README.md
       - run: "mkdir /goatland/"
       - run: "echo 'hi' > /goatland/testfile.txt"
-      - run: "cd /goatland/"
+      - run: "cd /goatland/ && ls"
       - run: "ls"
 
   module-b:
