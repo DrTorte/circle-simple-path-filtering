@@ -70,7 +70,9 @@ workflows:
   module-b:
     when: << pipeline.parameters.run-module-b >>
     jobs:
-      - module-b
+      - module-b:
+          requires:
+            - module-a
       - module-b-post:
           requires:
             - module-b
