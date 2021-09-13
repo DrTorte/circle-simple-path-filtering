@@ -24,6 +24,7 @@ jobs:
       - checkout
       - run: "echo 'Hello from module A!!'"
       - run: cat module-a/README.md
+      - run: "mkdir /goatland/"
       - run: "echo 'hi' > /goatland/testfile.txt"
       - run: "cd /goatland/"
       - run: "ls"
