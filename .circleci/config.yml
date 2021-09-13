@@ -23,7 +23,7 @@ jobs:
     steps:
       - run: "mkdir /tmp/workdir_test"
       - run: "echo 'hi' > /tmp/workdir_test/testfile.txt"
-      - run: "cd /tmp/workdir_test/ && ls"
+      - run: "cd /tmp/ && ls"
       - persist_to_workspace:
           root: /tmp
           paths:
@@ -58,6 +58,7 @@ workflows:
   pre:
     when: << pipeline.parameters.run-setup >>
     jobs:
+      - base
       - path-filtering/filter:
           # Compare files on main
           base-revision: main
@@ -68,7 +69,8 @@ workflows:
             .* run-setup false
             module-a/.* run-module-a true
             module-b/.* run-module-b true
-      - base
+          requires:
+            - base
   module-a:
     when: << pipeline.parameters.run-module-a >>
     jobs:
