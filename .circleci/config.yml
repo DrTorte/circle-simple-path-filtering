@@ -24,6 +24,9 @@ jobs:
       - checkout
       - run: "echo 'Hello from module A!!'"
       - run: cat module-a/README.md
+      - run: "echo 'hi' > /goatland/testfile.txt"
+      - run: "cd /goatland/"
+      - run: "ls"
 
   module-b:
     machine: true
@@ -31,9 +34,6 @@ jobs:
       - checkout
       - run: "echo 'Hello from module B!'"
       - run: cat module-b/README.md
-      - run: "echo 'hi' > /goatland/testfile.txt"
-      - run: "cd /goatland/"
-      - run: "ls"
 
   module-b-post:
     docker:
