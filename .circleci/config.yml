@@ -24,10 +24,13 @@ jobs:
       - checkout
       - run: "echo 'Hello from module A!!'"
       - run: cat module-a/README.md
-      - run: "mkdir /goatland/"
-      - run: "echo 'hi' > /goatland/testfile.txt"
-      - run: "cd /goatland/ && ls"
-      - run: "ls"
+      - run: "mkdir /workdir_test/"
+      - run: "echo 'hi' > /tmp/workdir_test/testfile.txt"
+      - run: "cd /tmp/workdir_test/ && ls"
+      - persist_to_workspace:
+          root: /tmp
+          paths:
+            - "workdir_test"
 
   module-b:
     machine: true
@@ -35,6 +38,9 @@ jobs:
       - checkout
       - run: "echo 'Hello from module B!'"
       - run: cat module-b/README.md
+      - attach_workspace:
+          at: /tmp/
+      - run: "cd /tmp/ && ls"
 
   module-b-post:
     docker:
