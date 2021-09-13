@@ -24,7 +24,7 @@ jobs:
       - checkout
       - run: "echo 'Hello from module A!!'"
       - run: cat module-a/README.md
-      - run: "mkdir /tmp && mkdir /tmp/workdir_test"
+      - run: "mkdir /tmp/workdir_test"
       - run: "echo 'hi' > /tmp/workdir_test/testfile.txt"
       - run: "cd /tmp/workdir_test/ && ls"
       - persist_to_workspace:
