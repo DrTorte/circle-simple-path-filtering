@@ -17,13 +17,10 @@ parameters:
     default: false
 
 jobs:
-  module-a:
+  base:
     docker:
       - image: alpine
     steps:
-      - checkout
-      - run: "echo 'Hello from module A!!'"
-      - run: cat module-a/README.md
       - run: "mkdir /tmp/workdir_test"
       - run: "echo 'hi' > /tmp/workdir_test/testfile.txt"
       - run: "cd /tmp/workdir_test/ && ls"
@@ -31,6 +28,14 @@ jobs:
           root: /tmp
           paths:
             - "workdir_test"
+
+  module-a:
+    docker:
+      - image: alpine
+    steps:
+      - checkout
+      - run: "echo 'Hello from module A!!'"
+      - run: cat module-a/README.md
 
   module-b:
     machine: true
@@ -70,9 +75,7 @@ workflows:
   module-b:
     when: << pipeline.parameters.run-module-b >>
     jobs:
-      - module-b:
-          requires:
-            - module-a
+      - module-b
       - module-b-post:
           requires:
             - module-b
